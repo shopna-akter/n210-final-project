@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app } from "../Firebase/firebase.init";
 
@@ -39,6 +39,10 @@ const AuthProvider = ({children}) => {
             return unsubscribe()
         }
     }, [])
+    const SignIn = (email, password) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password)
+    }
     const logOut = () => {
         setLoading(true)
         return signOut(auth)
@@ -47,7 +51,8 @@ const AuthProvider = ({children}) => {
         user,
         loading,
         createUser,
-        logOut
+        logOut,
+        SignIn
     }
     return (
         <AuthContext.Provider value={authInfo}>

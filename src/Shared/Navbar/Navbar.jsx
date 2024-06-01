@@ -27,11 +27,11 @@ const Navbar = () => {
         }
     }, [user]);
     const links = <>
-        <NavLink activeClassname='active' to='/' className='btn mr-2'>Home</NavLink>
-        <NavLink activeClassname='active' to='/AddFood' className='btn mr-2'>Add Foods</NavLink>
-        <NavLink activeClassname='active' to='ManageMyFood' className='btn mr-2'>Manage My Food</NavLink>
-        <NavLink activeClassname='active' to='/AvailableFoods' className='btn mr-2'>Available Foods</NavLink>
-        <NavLink activeClassname='active' to='/MyFoodRequest' className='btn mr-2'>My Food Request</NavLink>
+        <NavLink to='/' className='btn btn-ghost mr-2'>Home</NavLink>
+        <NavLink to='/AddFood' className='btn btn-ghost mr-2'>Add Foods</NavLink>
+        <NavLink to='ManageMyFood' className='btn btn-ghost mr-2'>Manage My Food</NavLink>
+        <NavLink to='/AvailableFoods' className='btn btn-ghost mr-2'>Available Foods</NavLink>
+        <NavLink to='/MyFoodRequest' className='btn btn-ghost mr-2'>My Food Request</NavLink>
         <Link to='/Login' className="btn mr-2 md:hidden">Login</Link>
         <Link to='/Register' className="btn md:hidden">Register</Link>
     </>
