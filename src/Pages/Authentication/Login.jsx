@@ -7,7 +7,7 @@ import groovyWalkAnimation from "../../../Animation - 1715749319003.json";
 import { app } from "../../Firebase/firebase.init";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Lottie from "lottie-react";
-import { Helmet } from "react-helmet-async";
+// import { Helmet } from "react-helmet-async";
 const Login = () => {
     // const navigate = useNavigate()
     const { SignIn } = useContext(AuthContext)
