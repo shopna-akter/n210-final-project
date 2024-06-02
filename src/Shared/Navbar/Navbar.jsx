@@ -27,7 +27,7 @@ const Navbar = () => {
         }
     }, [user]);
     const links = <>
-        <NavLink to='/' className='btn btn-ghost mr-2'>Home</NavLink>
+        <NavLink to='/' className='btn bg-indigo-400 btn-ghost mr-2'>Home</NavLink>
         <Link to='/Login' className="btn mr-2 md:hidden">Login</Link>
         <Link to='/Register' className="btn md:hidden">Register</Link>
     </>
@@ -60,7 +60,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <img className="h-12 w-50" src="https://i.ibb.co/hLS0Hsq/header-logo.png" alt="" />
+                    <Link to='/'><img className="h-20 w-80" src="https://i.ibb.co/cvJBV9S/Pico-Workers.png" alt="" /></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

@@ -5,9 +5,11 @@ import { FaGoogle } from "react-icons/fa";
 import { getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../../Firebase/firebase.init";
 import { GoogleAuthProvider } from "firebase/auth/web-extension";
+import useAxiosPubic from "../../Hooks/axiosPubic";
 
 const Register = () => {
     const { createUser } = useContext(AuthContext)
+    const axiosPublic = useAxiosPubic()
     const handleFormSubmit = e => {
         e.preventDefault();
         const form = e.target
@@ -21,10 +23,15 @@ const Register = () => {
         createUser(email, password)
             .then(res => {
                 console.log(res.user);
-                Swal.fire({
-                    title: "Success!",
-                    text: "Registration successful",
-                    icon: "success"
+                axiosPublic.post('/users',RegisteredData)
+                .then(res =>{
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Registration successful",
+                            icon: "success"
+                        })
+                    }
                 })
             })
             .catch(err => {
