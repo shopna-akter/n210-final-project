@@ -1,18 +1,15 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import {FaGoogle } from "react-icons/fa";
 import Swal from "sweetalert2";
 import groovyWalkAnimation from "../../../Animation - 1715749319003.json";
-import { app } from "../../Firebase/firebase.init";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Lottie from "lottie-react";
+import SocialLogin from "../../Hooks/SocialLogin";
 // import { Helmet } from "react-helmet-async";
 const Login = () => {
     // const navigate = useNavigate()
     const { SignIn } = useContext(AuthContext)
-    const googleProvider = new GoogleAuthProvider()
-    const auth = getAuth(app)
     const handleLogin = e => {
         e.preventDefault()
         const form = e.target
@@ -32,25 +29,6 @@ const Login = () => {
                 console.log(error);
                 Swal.fire({
                     title: "Login Failed!",
-                    text: `${error.message}`,
-                    icon: "error"
-                })
-            })
-    }
-    const handleSignInWithGoogle = () => {
-        signInWithPopup(auth, googleProvider)
-            .then(result => {
-                console.log(result);
-                Swal.fire({
-                    title: "Success!",
-                    text: "Login successful with Google",
-                    icon: "success"
-                })
-            })
-            .catch(error => {
-                console.log(error);
-                Swal.fire({
-                    title: "Login Failed with Google!",
                     text: `${error.message}`,
                     icon: "error"
                 })
@@ -98,8 +76,7 @@ const Login = () => {
                                 <div className="form-control mt-6">
                                     <button className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600">Login</button>
                                 </div>
-                                <div className="divider">OR</div>
-                                <button onClick={handleSignInWithGoogle} className="flex btn mb-2 bg-yellow-300 hover:bg-orange-400">Sign in with <FaGoogle></FaGoogle></button>
+                                <SocialLogin></SocialLogin>
                                 {/* <button onClick={handleSignInWithGithub} className="flex btn btn-neutral">Sign in with <FaGithub></FaGithub></button> */}
                                 <h2>Dont have an account ? <Link to='/Register' className="btn-link">Register</Link></h2>
                             </div>
