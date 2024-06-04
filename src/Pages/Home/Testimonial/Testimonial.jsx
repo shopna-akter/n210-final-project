@@ -18,6 +18,7 @@ const Testimonial = () => {
     return (
         <div>
             <div className="my-20">
+                <h2>Testimonials</h2>
 
                 <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
 
@@ -32,7 +33,7 @@ const Testimonial = () => {
                                     readOnly
                                 />
                                 <p className="py-8">{review.details}</p>
-                                <h3 className="text-2xl text-orange-400">{review.name}</h3>
+                                <h3 className="text-2xl font-semibold text-indigo-600">{review.name}</h3>
                             </div>
                         </SwiperSlide>)
                     }

@@ -1,75 +1,63 @@
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaSearch, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa";
+import {FaBriefcase, FaCoins, FaDollarSign, FaEnvelope, FaHome, FaList,FaShoppingCart } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useUserFetch from "../../../Hooks/useUserFetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../../../Shared/Footer/Footer"
 import DashboardNavbar from "../../../Shared/DashboardNavbar/DashboardNavbar";
 
 const Dashboard = () => {
-    // const [userRole, setUserRole] = useState('Worker')
-    // const userData = useUserFetch()
-    // if (userData === 'TaskCreator') {
-    //     setUserRole('TaskCreator')
-    // }
+    const [userRole, setUserRole] = useState('Worker')
+    const userData = useUserFetch()
+    useEffect(() => {
+        if (userData?.role === 'TaskCreator') {
+            setUserRole('TaskCreator');
+        } else {
+            setUserRole('Worker');
+        }
+    }, [userData]);
     return (
         <div className="flex">
-            {/* dashboard side bar */}
-            {/* <div className="w-64 min-h-screen bg-orange-400">
+            <div className="min-h-screen bg-indigo-400">
                 <ul className="menu p-4">
                     {
                         userRole==='TaskCreator' ? <>
                             <li>
-                                <NavLink to="/dashboard/adminHome">
-                                    <FaHome></FaHome>
-                                    Admin Home</NavLink>
+                                <NavLink to="/Dashboard/addTasks">
+                                    <FaBriefcase></FaBriefcase>
+                                    Add Tasks</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/addItems">
-                                    <FaUtensils></FaUtensils>
-                                    Add Items</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/manageItems">
+                                <NavLink to="/dashboard/manageTasks">
                                     <FaList></FaList>
-                                    Manage Items</NavLink>
+                                    Manage Tasks</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/bookings">
-                                    <FaBook></FaBook>
-                                    Manage Bookings</NavLink>
+                                <NavLink to="/dashboard/purchaseCoin">
+                                    <FaCoins></FaCoins>
+                                    Purchase Coin</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/users">
-                                    <FaUsers></FaUsers>
-                                    All Users</NavLink>
+                                <NavLink to="/dashboard/paymentHistory">
+                                    <FaShoppingCart></FaShoppingCart>
+                                    Payment history</NavLink>
                             </li>
                         </>
                             :
                             <>
                                 <li>
-                                    <NavLink to="/dashboard/userHome">
-                                        <FaHome></FaHome>
-                                        User Home</NavLink>
+                                    <NavLink to="/dashboard/taskList">
+                                        <FaBriefcase></FaBriefcase>
+                                        Task List</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/history">
-                                        <FaCalendar></FaCalendar>
-                                        Not History</NavLink>
+                                    <NavLink to="/dashboard/mySubmissions">
+                                        <FaEnvelope></FaEnvelope>
+                                        My Submissions</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/cart">
-                                        <FaShoppingCart></FaShoppingCart>
-                                        My Cart ({cart.length})</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/dashboard/review">
-                                        <FaAd></FaAd>
-                                        Add a Review</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/dashboard/paymentHistory">
-                                        <FaList></FaList>
-                                        Real Payment History</NavLink>
+                                    <NavLink to="/dashboard/withdrawls">
+                                        <FaDollarSign></FaDollarSign>
+                                        Withdrawls</NavLink>
                                 </li>
                             </>
                     }
@@ -79,23 +67,8 @@ const Dashboard = () => {
                             <FaHome></FaHome>
                             Home</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/order/salad">
-                            <FaSearch></FaSearch>
-                            Menu</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/order/contact">
-                            <FaEnvelope></FaEnvelope>
-                            Contact</NavLink>
-                    </li>
                 </ul>
-            </div> */}
-            <li>
-                <NavLink to="Dashboard/Alluser">
-                    <FaUsers></FaUsers>
-                    All Users</NavLink>
-            </li>
+            </div>
             <div className="flex-1 p-8">
                 <DashboardNavbar></DashboardNavbar>
                 <Outlet></Outlet>

@@ -1,8 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-// import useUserFetch from "../../../Hooks/useUserFetch";
 import {  useEffect, useState } from "react";
 
 
@@ -18,7 +16,7 @@ const Allusers = () => {
     }, [])
     console.log(users);
     const handleMakeAdmin = user => {
-        axiosSecure.patch(`/users/admin/${user._id}`)
+        axiosSecure.patch(`/users/${user._id}`)
             .then(res => {
                 console.log(res.data)
                 if (res.data.modifiedCount > 0) {
@@ -83,14 +81,13 @@ const Allusers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    {user.Role === 'admin' ? 'Admin' : <button
+                                    <button
                                         onClick={() => handleMakeAdmin(user)}
                                         className="btn btn-lg bg-indigo-600">
                                         <FaUsers className="text-white 
                                         text-2xl"></FaUsers>
                                         
                                     </button>
-}
                                 </td>
                                 <td>
                                     <button
