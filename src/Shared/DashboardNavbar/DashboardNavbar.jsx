@@ -7,7 +7,7 @@ const DashboardNavbar = () => {
     return (
         <div className="navbar">
             <div className="navbar-start">
-                <Link to='/'><img className="h-20 w-80" src="https://i.ibb.co/cvJBV9S/Pico-Workers.png" alt="" /></Link>
+                <Link to='/'><img className="h-20 w-80" src="https://i.ibb.co/FJ2Fkt4/Pico-Workers-removebg-preview.png" alt="" /></Link>
             </div>
             <div className="navbar-end">
                 <div>
