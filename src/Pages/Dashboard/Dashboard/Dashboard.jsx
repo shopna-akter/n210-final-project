@@ -45,7 +45,7 @@ const Dashboard = () => {
                             :
                             <>
                                 <li>
-                                    <NavLink to="/dashboard/taskList">
+                                    <NavLink to="/Dashboard/taskList">
                                         <FaBriefcase></FaBriefcase>
                                         Task List</NavLink>
                                 </li>

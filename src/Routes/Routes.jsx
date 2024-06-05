@@ -9,6 +9,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import Allusers from "../Pages/Dashboard/Allusers.jsx/Allusers";
 import AddTask from "../Pages/Dashboard/addTask/AddTask";
 import MyTasks from "../Pages/Dashboard/MyTask/MyTasks";
+import TaskList from "../Pages/Dashboard/TaskList/TaskList";
 
 
   export const router = createBrowserRouter([
@@ -45,6 +46,10 @@ import MyTasks from "../Pages/Dashboard/MyTask/MyTasks";
         {
           path: '/Dashboard/manageTasks',
           element: <MyTasks></MyTasks>
+        },
+        {
+          path: '/Dashboard/taskList',
+          element: <TaskList></TaskList>
         }
       ]
     }
