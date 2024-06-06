@@ -10,6 +10,7 @@ import Allusers from "../Pages/Dashboard/Allusers.jsx/Allusers";
 import AddTask from "../Pages/Dashboard/addTask/AddTask";
 import MyTasks from "../Pages/Dashboard/MyTask/MyTasks";
 import TaskList from "../Pages/Dashboard/TaskList/TaskList";
+import TaskDetails from "../Pages/Dashboard/TaskDetails/TaskDetails";
 
 
   export const router = createBrowserRouter([
@@ -50,6 +51,11 @@ import TaskList from "../Pages/Dashboard/TaskList/TaskList";
         {
           path: '/Dashboard/taskList',
           element: <TaskList></TaskList>
+        },
+        {
+          path: '/Dashboard/taskDetails',
+          element: <TaskDetails></TaskDetails>,
+          loader: () => fetch('http://localhost:5000/availableTasks')
         }
       ]
     }
