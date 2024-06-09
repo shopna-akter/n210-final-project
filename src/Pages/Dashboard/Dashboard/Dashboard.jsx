@@ -63,7 +63,7 @@ const Dashboard = () => {
                     }
                     <div className="divider"></div>
                     <li>
-                        <NavLink to="/">
+                        <NavLink to={`/Dashboard/${userData?.role}Home`}>
                             <FaHome></FaHome>
                             Home</NavLink>
                     </li>

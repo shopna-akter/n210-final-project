@@ -63,7 +63,7 @@ const TaskList = () => {
                                                 <span>{task.payable_amount}</span>
                                             </div>
                                         </div>
-                                        <Link className="btn bg-indigo-500" to={`/tasks/${task._id}`}>View Details</Link>
+                                        <Link className="btn bg-indigo-500" to={`/Dashboard/taskDetails/${task._id}`}>View Details</Link>
                                     </div>
                                 </div>
                             </div>

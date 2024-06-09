@@ -11,6 +11,8 @@ import AddTask from "../Pages/Dashboard/addTask/AddTask";
 import MyTasks from "../Pages/Dashboard/MyTask/MyTasks";
 import TaskList from "../Pages/Dashboard/TaskList/TaskList";
 import TaskDetails from "../Pages/Dashboard/TaskDetails/TaskDetails";
+import MySubmission from "../Pages/Dashboard/MySubmission/MySubmission";
+import WorkerHome from "../Pages/Dashboard/WorkerHome/WorkerHome";
 
 
   export const router = createBrowserRouter([
@@ -53,9 +55,17 @@ import TaskDetails from "../Pages/Dashboard/TaskDetails/TaskDetails";
           element: <TaskList></TaskList>
         },
         {
-          path: '/Dashboard/taskDetails',
+          path: '/Dashboard/taskDetails/:id',
           element: <TaskDetails></TaskDetails>,
           loader: () => fetch('http://localhost:5000/availableTasks')
+        },
+        {
+          path: '/Dashboard/mySubmissions',
+          element: <MySubmission></MySubmission>
+        },
+        {
+          path: '/Dashboard/WorkerHome',
+          element: <WorkerHome></WorkerHome>
         }
       ]
     }

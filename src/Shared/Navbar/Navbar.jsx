@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, NavLink} from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useUserFetch from "../../Hooks/useUserFetch";
@@ -48,15 +48,19 @@ const Navbar = () => {
     }
     const links = <>
         <NavLink to='/' className='btn bg-indigo-400 hover:bg-indigo-500 btn-ghost mr-2'>Home</NavLink>
-        <NavLink to='/Dashboard' className='btn bg-indigo-400 hover:bg-indigo-500 btn-ghost mr-2'>Dashboard</NavLink>
+
         {
             user ?
-                <button onClick={handleSignOut} className="btn bg-orange-400 hover:bg-orange-600">Sign Out</button>
+                <>
+                    <NavLink to={`/Dashboard/${userData?.role}Home`} className='btn bg-indigo-400 hover:bg-indigo-500 btn-ghost mr-2'>Dashboard</NavLink>
+                    <button onClick={handleSignOut} className="btn bg-orange-400 hover:bg-orange-600">Sign Out</button>
+                </>
                 :
-                <div>
+                <>
+                    <Link className="btn mr-2 md:hidden">Watch Demo</Link>
                     <Link to='/Login' className="btn mr-2 md:hidden">Login</Link>
                     <Link to='/Register' className="btn md:hidden">Register</Link>
-                </div>
+                </>
         }
 
     </>
