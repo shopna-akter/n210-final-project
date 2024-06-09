@@ -13,6 +13,7 @@ import TaskList from "../Pages/Dashboard/TaskList/TaskList";
 import TaskDetails from "../Pages/Dashboard/TaskDetails/TaskDetails";
 import MySubmission from "../Pages/Dashboard/MySubmission/MySubmission";
 import WorkerHome from "../Pages/Dashboard/WorkerHome/WorkerHome";
+import TaskCreatorHome from "../Pages/Dashboard/TaskCreatorHome/TaskCreatorHome";
 
 
   export const router = createBrowserRouter([
@@ -66,6 +67,10 @@ import WorkerHome from "../Pages/Dashboard/WorkerHome/WorkerHome";
         {
           path: '/Dashboard/WorkerHome',
           element: <WorkerHome></WorkerHome>
+        },
+        {
+          path: '/Dashboard/TaskCreatorHome',
+          element: <TaskCreatorHome></TaskCreatorHome>
         }
       ]
     }

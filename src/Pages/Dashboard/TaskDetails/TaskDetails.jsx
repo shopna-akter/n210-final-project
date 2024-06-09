@@ -1,7 +1,7 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import useUserFetch from "../../../Hooks/useUserFetch";
-
+import Countdown from 'react-countdown';
 const TaskDetails = () => {
     const userData = useUserFetch();
     const tasks = useLoaderData();
@@ -50,6 +50,18 @@ const TaskDetails = () => {
             }
         });
     }
+    const completionDateTime = new Date(task.completion_date).getTime();
+    const renderer = ({ days, hours, minutes, seconds, completed }) => {
+        if (completed) {
+            return <span>Task completed!</span>;
+        } else {
+            return (
+                <span>
+                    {days}d {hours}h {minutes}m {seconds}s
+                </span>
+            );
+        }
+    };
 
     return (
         <div className="container mx-auto my-8">
@@ -88,6 +100,12 @@ const TaskDetails = () => {
                     <div className="flex gap-2">
                         <h2 className="md:text-2xl font-semiBold">Current Time:</h2>
                         <p className="md:text-2xl font-semiBold">{task.current_time}</p>
+                    </div>
+                    <div className="flex gap-2">
+                        <h2 className="md:text-2xl font-semiBold">Time Remaining:</h2>
+                        <p className="md:text-2xl font-semiBold">
+                            <Countdown date={completionDateTime} renderer={renderer} />
+                        </p>
                     </div>
                 </div>
                 <div className="mt-8">

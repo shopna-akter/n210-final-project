@@ -12,7 +12,7 @@ const useUserFetch = () => {
             })
     }, [])
     const userData = user ? users.find(userData => userData.email == user.email) : null
-    console.log(userData);
+    // console.log(userData);
     if(userData){
         return userData
     }
