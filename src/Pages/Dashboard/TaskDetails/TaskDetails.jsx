@@ -54,7 +54,8 @@ const TaskDetails = () => {
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
             return <span>Task completed!</span>;
-        } else {
+        } 
+        else {
             return (
                 <span>
                     {days}d {hours}h {minutes}m {seconds}s

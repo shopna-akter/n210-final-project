@@ -14,7 +14,9 @@ import TaskDetails from "../Pages/Dashboard/TaskDetails/TaskDetails";
 import MySubmission from "../Pages/Dashboard/MySubmission/MySubmission";
 import WorkerHome from "../Pages/Dashboard/WorkerHome/WorkerHome";
 import TaskCreatorHome from "../Pages/Dashboard/TaskCreatorHome/TaskCreatorHome";
-
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
+import PurchaseCoins from "../Pages/Dashboard/PurchaseCoin/PurchaseCoins";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 
   export const router = createBrowserRouter([
     {
@@ -71,6 +73,18 @@ import TaskCreatorHome from "../Pages/Dashboard/TaskCreatorHome/TaskCreatorHome"
         {
           path: '/Dashboard/TaskCreatorHome',
           element: <TaskCreatorHome></TaskCreatorHome>
+        },
+        {
+          path: '/Dashboard/adminHome',
+          element: <AdminHome></AdminHome>
+        },
+        {
+          path: '/Dashboard/PurchaseCoin',
+          element: <PurchaseCoins></PurchaseCoins>
+        },
+        {
+          path: '/Dashboard/paymentHistory',
+          element: <PaymentHistory></PaymentHistory>
         }
       ]
     }

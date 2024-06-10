@@ -11,13 +11,11 @@ const TaskCreatorHome = () => {
     useEffect(() => {
         axiosSecure.get(`http://localhost:5000/submission`)
             .then(res => {
-                const tasks = res.data.filter(task => userData?.email == task?.creator_email)
-                console.log(tasks);
+                const tasks = res.data.filter(task => userData?.email == task.creator_email)
                 const pendingTasks = tasks.filter(pendingTask => pendingTask.status == 'pending')
-                console.log(pendingTasks);
                 setSelectedTasks(pendingTasks)
             })
-    }, [])
+    }, [userData, axiosSecure])
 
 
     const handleReject = id => {
@@ -44,21 +42,21 @@ const TaskCreatorHome = () => {
             }
         })
     }
-    const handleApprove = async(id, worker_email, payable_amount) => {
+    const handleApprove = async (id, worker_email, payable_amount) => {
         const newStatus = 'approved'
         const updates = { newStatus, worker_email, payable_amount }
-        const res = await axiosSecure.put(`/submission/${id}`, updates);
-
-        console.log(res.data);
-
-        if (res.data.modifiedCount > 0) {
-            Swal.fire({
-                icon: "success",
-                title: "Approved successfully",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
+        axiosSecure.put(`/submission/${id}`, updates)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Approved successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
     const openModal = (submission) => {
         setSelectedTasks(submission);

@@ -1,4 +1,4 @@
-import {FaBriefcase, FaCoins, FaDollarSign, FaEnvelope, FaHome, FaList,FaShoppingCart } from "react-icons/fa";
+import { FaBriefcase, FaCoins, FaDollarSign, FaEnvelope, FaHome, FaList, FaShoppingCart } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useUserFetch from "../../../Hooks/useUserFetch";
 import { useEffect, useState } from "react";
@@ -20,46 +20,54 @@ const Dashboard = () => {
             <div className="min-h-screen bg-indigo-400">
                 <ul className="menu p-4">
                     {
-                        userRole==='TaskCreator' ? <>
+                        userRole === 'TaskCreator' ? <>
                             <li>
                                 <NavLink to="/Dashboard/addTasks">
                                     <FaBriefcase></FaBriefcase>
                                     Add Tasks</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/manageTasks">
+                                <NavLink to="/Dashboard/manageTasks">
                                     <FaList></FaList>
                                     Manage Tasks</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/purchaseCoin">
+                                <NavLink to="/Dashboard/PurchaseCoin">
                                     <FaCoins></FaCoins>
                                     Purchase Coin</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/paymentHistory">
+                                <NavLink to="/Dashboard/paymentHistory">
                                     <FaShoppingCart></FaShoppingCart>
                                     Payment history</NavLink>
                             </li>
                         </>
-                            :
-                            <>
-                                <li>
-                                    <NavLink to="/Dashboard/taskList">
-                                        <FaBriefcase></FaBriefcase>
-                                        Task List</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/dashboard/mySubmissions">
-                                        <FaEnvelope></FaEnvelope>
-                                        My Submissions</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/dashboard/withdrawls">
-                                        <FaDollarSign></FaDollarSign>
-                                        Withdrawls</NavLink>
-                                </li>
-                            </>
+                            : userRole == 'Worker' ?
+                                <>
+                                    <li>
+                                        <NavLink to="/Dashboard/taskList">
+                                            <FaBriefcase></FaBriefcase>
+                                            Task List</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/mySubmissions">
+                                            <FaEnvelope></FaEnvelope>
+                                            My Submissions</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/withdrawls">
+                                            <FaDollarSign></FaDollarSign>
+                                            Withdrawls</NavLink>
+                                    </li>
+                                </>
+                                :
+                                <>
+                                    <li>
+                                        <NavLink to="/Dashboard/alluser">
+                                            <FaDollarSign></FaDollarSign>
+                                            All User</NavLink>
+                                    </li>
+                                </>
                     }
                     <div className="divider"></div>
                     <li>

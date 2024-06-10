@@ -17,16 +17,16 @@ const Testimonial = () => {
     },[])
     return (
         <div>
-            <div className="my-20">
-                <h2>Testimonials</h2>
-
+            <div className="my-20 text-center">
+                <h2 className="font-bold text-2xl">Testimonials</h2>
+                <p>Testimonials offer authentic insights from satisfied customers, enhancing credibility and trust. Share experiences, feedback, <br /> and success stories to inspire confidence and connect with potential customers on a personal level.</p>
                 <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
 
                     {
                         reviews.map(review => <SwiperSlide
                             key={review._id}
                         >
-                            <div className="flex flex-col items-center mx-24 my-16">
+                            <div className="flex flex-col items-center mx-24 mt-8 mb-10">
                                 <Rating
                                     style={{ maxWidth: 180 }}
                                     value={review.rating}

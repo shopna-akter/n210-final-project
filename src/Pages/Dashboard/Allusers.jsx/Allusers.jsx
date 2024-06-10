@@ -1,35 +1,30 @@
-import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import {  useEffect, useState } from "react";
-
-
-const Allusers = () => {
+import { useEffect, useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
+const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([]);
+
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('http://localhost:5000/users/workers')
             .then(res => res.json())
             .then(data => {
                 setUsers(data);
-            })
-    }, [])
-    console.log(users);
-    const handleMakeAdmin = user => {
-        axiosSecure.patch(`/users/${user._id}`)
-            .then(res => {
-                console.log(res.data)
-                if (res.data.modifiedCount > 0) {
-                    Swal.fire({
-                        icon: "success",
-                        title: `${user.name} is an Admin Now!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            })
-    }
+            });
+    }, []);
 
+    const handleRoleChange = (user, role) => {
+        axiosSecure.patch(`/users/${user._id}`, { role })
+            .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: `Role updated to ${role} for ${user.name}!`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+    };
     const handleDeleteUser = user => {
         Swal.fire({
             title: "Are you sure?",
@@ -55,7 +50,6 @@ const Allusers = () => {
             }
         });
     }
-
     return (
         <div>
             <div className="flex justify-evenly my-4">
@@ -64,10 +58,9 @@ const Allusers = () => {
             </div>
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
-                    {/* head */}
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -75,19 +68,20 @@ const Allusers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            users.map((user, index) => <tr key={user._id}>
+                        {users.map((user, index) => (
+                            <tr key={user._id}>
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    <button
-                                        onClick={() => handleMakeAdmin(user)}
-                                        className="btn btn-lg bg-indigo-600">
-                                        <FaUsers className="text-white 
-                                        text-2xl"></FaUsers>
-                                        
-                                    </button>
+                                    <select
+                                        value={user.role}
+                                        onChange={(e) => handleRoleChange(user, e.target.value)}
+                                        className="select select-bordered w-full max-w-xs">
+                                        <option value="admin">Admin</option>
+                                        <option value="TaskCreator">Task-Creator</option>
+                                        <option value="Worker">Worker</option>
+                                    </select>
                                 </td>
                                 <td>
                                     <button
@@ -96,9 +90,8 @@ const Allusers = () => {
                                         <FaTrashAlt className="text-red-600"></FaTrashAlt>
                                     </button>
                                 </td>
-                            </tr>)
-                        }
-
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
@@ -106,4 +99,4 @@ const Allusers = () => {
     );
 };
 
-export default Allusers;
+export default AllUsers;

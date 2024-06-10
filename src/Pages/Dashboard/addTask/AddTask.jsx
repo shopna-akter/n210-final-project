@@ -1,11 +1,8 @@
-import { useContext } from "react";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../../Providers/AuthProvider";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useUserFetch from "../../../Hooks/useUserFetch";
 
 const AddTask = () => {
-    const { user } = useContext(AuthContext)
     const userData = useUserFetch()
     const axiosSecure = useAxiosSecure()
     const handleAddTask = e => {
@@ -19,7 +16,7 @@ const AddTask = () => {
         const submission_info = form.submission_info.value;
         const task_image_url = form.task_image_url.value;
         const newTask = {
-            task_title, task_detail, task_quantity, payable_amount, completion_date, submission_info, task_image_url, creator_email: user.email, creator_name: user.name, current_time: new Date()
+            task_title, task_detail, task_quantity, payable_amount, completion_date, submission_info, task_image_url, creator_email: userData.email, creator_name: userData.name, current_time: new Date()
         };
         if (task_quantity * payable_amount > userData?.coin) {
             Swal.fire({
