@@ -1,19 +1,18 @@
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
     const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-        fetch('http://localhost:5000/users/workers')
-            .then(res => res.json())
-            .then(data => {
-                setUsers(data);
-            });
-    }, []);
-
+    axiosSecure.get('http://localhost:5000/users/workers', {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('access-token')}`
+        }
+    })
+        .then(res => {
+            setUsers(res.data)
+        })
     const handleRoleChange = (user, role) => {
         axiosSecure.patch(`/users/${user._id}`, { role })
             .then(() => {

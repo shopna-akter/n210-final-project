@@ -2,12 +2,14 @@
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app } from "../Firebase/firebase.init";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null)
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({children}) => {
     const auth = getAuth(app)
     const [user , setUser] = useState(null)
+    const axiosPublic = useAxiosPublic()
     const [loading , setLoading] = useState(true)
     const createUser = (email, password) => {
         setLoading(true)
@@ -17,23 +19,21 @@ const AuthProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
             setLoading(false)
-            // const userEmail =  currentUser?.email || user?.email
-            // const loggedUser = { email: userEmail }
-            // if (currentUser) {
-            //     axios.post('https://assignment-p11-server.vercel.app/jwt', loggedUser, { withCredentials: true })
-            //         .then(res => {
-            //             console.log('token response', res.data);
-            //         })
-            //         .catch(error => console.log(error));
-            // }
-            // else {
-            //     axios.post('https://assignment-p11-server.vercel.app/logout', loggedUser , {
-            //         withCredentials:true
-            //     })
-            //     .then(res => {
-            //         console.log(res.data);
-            //     })
-            // }
+            setUser(currentUser);
+            if (currentUser) {
+                const userInfo = { email: currentUser.email };
+                axiosPublic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token);
+                            setLoading(false);
+                        }
+                    })
+            }
+            else {
+                localStorage.removeItem('access-token');
+                setLoading(false);
+            }
         })
         return () => {
             return unsubscribe()

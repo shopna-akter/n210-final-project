@@ -1,4 +1,4 @@
-import { FaBriefcase, FaCoins, FaDollarSign, FaEnvelope, FaHome, FaList, FaShoppingCart } from "react-icons/fa";
+import { FaBriefcase, FaCoins, FaDollarSign, FaEnvelope, FaHome, FaList, FaShoppingCart, FaUser } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useUserFetch from "../../../Hooks/useUserFetch";
 import { useEffect, useState } from "react";
@@ -11,8 +11,8 @@ const Dashboard = () => {
     useEffect(() => {
         if (userData?.role === 'TaskCreator') {
             setUserRole('TaskCreator');
-        } else {
-            setUserRole('Worker');
+        } if(userData?.role === 'admin') {
+            setUserRole('admin');
         }
     }, [userData]);
     return (
@@ -27,7 +27,7 @@ const Dashboard = () => {
                                     Add Tasks</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/Dashboard/manageTasks">
+                                <NavLink to="/Dashboard/myTasks">
                                     <FaList></FaList>
                                     Manage Tasks</NavLink>
                             </li>
@@ -42,7 +42,7 @@ const Dashboard = () => {
                                     Payment history</NavLink>
                             </li>
                         </>
-                            : userRole == 'Worker' ?
+                            : userRole === 'Worker' ?
                                 <>
                                     <li>
                                         <NavLink to="/Dashboard/taskList">
@@ -55,7 +55,7 @@ const Dashboard = () => {
                                             My Submissions</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="/dashboard/withdrawls">
+                                        <NavLink to="/Dashboard/withdrawls">
                                             <FaDollarSign></FaDollarSign>
                                             Withdrawls</NavLink>
                                     </li>
@@ -66,6 +66,12 @@ const Dashboard = () => {
                                         <NavLink to="/Dashboard/alluser">
                                             <FaDollarSign></FaDollarSign>
                                             All User</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to='/Dashboard/manageTasks'>
+                                            <FaUser></FaUser>
+                                            Manage Tasks
+                                        </NavLink>
                                     </li>
                                 </>
                     }

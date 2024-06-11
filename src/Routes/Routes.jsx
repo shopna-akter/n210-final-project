@@ -17,11 +17,17 @@ import TaskCreatorHome from "../Pages/Dashboard/TaskCreatorHome/TaskCreatorHome"
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import PurchaseCoins from "../Pages/Dashboard/PurchaseCoin/PurchaseCoins";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
+import Withdrawls from "../Pages/Dashboard/Withdraw/Withdrawls";
+import ManageTasks from "../Pages/Dashboard/ManageTasks/ManageTasks";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
   export const router = createBrowserRouter([
     {
       path: "/",
       element: <Root></Root>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
          {
             path: '/',
@@ -39,19 +45,13 @@ import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
     },
     {
       path: 'Dashboard',
-      element: <Dashboard></Dashboard>,
+      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
+        // worker
         {
-          path: '/Dashboard/alluser',
-          element: <Allusers></Allusers>
-        },
-        {
-          path: '/Dashboard/addTasks',
-          element: <AddTask></AddTask>
-        },
-        {
-          path: '/Dashboard/manageTasks',
-          element: <MyTasks></MyTasks>
+          path: '/Dashboard/WorkerHome',
+          element: <WorkerHome></WorkerHome>
         },
         {
           path: '/Dashboard/taskList',
@@ -67,24 +67,42 @@ import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
           element: <MySubmission></MySubmission>
         },
         {
-          path: '/Dashboard/WorkerHome',
-          element: <WorkerHome></WorkerHome>
+          path: '/Dashboard/withdrawls',
+          element: <Withdrawls></Withdrawls>
+        },
+        // task-creator
+        {
+          path: '/Dashboard/addTasks',
+          element: <AddTask></AddTask>
         },
         {
           path: '/Dashboard/TaskCreatorHome',
           element: <TaskCreatorHome></TaskCreatorHome>
         },
         {
-          path: '/Dashboard/adminHome',
-          element: <AdminHome></AdminHome>
+          path: '/Dashboard/myTasks',
+          element: <MyTasks></MyTasks>
+        },
+        {
+          path: '/Dashboard/paymentHistory',
+          element: <PaymentHistory></PaymentHistory>
         },
         {
           path: '/Dashboard/PurchaseCoin',
           element: <PurchaseCoins></PurchaseCoins>
         },
+        // admin
         {
-          path: '/Dashboard/paymentHistory',
-          element: <PaymentHistory></PaymentHistory>
+          path: '/Dashboard/alluser',
+          element: <AdminRoute><Allusers></Allusers></AdminRoute>
+        },
+        {
+          path: '/Dashboard/adminHome',
+          element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+        },
+        {
+          path: '/Dashboard/manageTasks',
+          element: <AdminRoute><ManageTasks></ManageTasks></AdminRoute>
         }
       ]
     }
