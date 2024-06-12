@@ -12,7 +12,7 @@ const MySubmission = () => {
 
     useEffect(() => {
         if (user && user.email) {
-            fetch(`http://localhost:5000/submissionCount/${user.email}`)
+            fetch(`https://final-project-server-jade.vercel.app/submissionCount/${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     setCount(data.count);
@@ -26,7 +26,7 @@ const MySubmission = () => {
     const { isLoading, isError, error, data: mySubmissions } = useQuery({
         queryKey: ['Submission', user.email, itemsPerPage, currentPage],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/submission?email=${user.email}&page=${currentPage}&size=${itemsPerPage}`, { credentials: 'include' });
+            const res = await fetch(`https://final-project-server-jade.vercel.app/submission?email=${user.email}&page=${currentPage}&size=${itemsPerPage}`, { credentials: 'include' });
             if (!res.ok) {
                 throw new Error('Network response was not ok');
             }

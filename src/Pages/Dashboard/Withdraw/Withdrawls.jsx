@@ -43,7 +43,7 @@ const Withdrawls = () => {
             accountNumber,
             withdrawTime,
         };
-        axiosSecure.post('http://localhost:5000/withdrawals', withdrawalData, {
+        axiosSecure.post('https://final-project-server-jade.vercel.app/withdrawals', withdrawalData, {
             headers: {
                 'Content-Type': 'application/json'
             }

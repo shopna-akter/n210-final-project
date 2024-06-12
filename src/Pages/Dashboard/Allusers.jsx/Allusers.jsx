@@ -5,7 +5,7 @@ import { FaTrashAlt } from "react-icons/fa";
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
     const [users, setUsers] = useState([]);
-    axiosSecure.get('http://localhost:5000/users/workers', {
+    axiosSecure.get('https://final-project-server-jade.vercel.app/users/workers', {
         headers: {
             authorization: `Bearer ${localStorage.getItem('access-token')}`
         }

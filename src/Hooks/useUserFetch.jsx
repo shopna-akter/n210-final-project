@@ -5,7 +5,7 @@ const useUserFetch = () => {
     const { user } = useContext(AuthContext)
     const [users, setUsers] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/users' , {
+        fetch('https://final-project-server-jade.vercel.app/users' , {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('access-token')}`
             }

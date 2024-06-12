@@ -28,7 +28,7 @@ const AddTask = () => {
             })
         }
         else {
-            axiosSecure.post('http://localhost:5000/tasks', newTask, {
+            axiosSecure.post('https://final-project-server-jade.vercel.app/tasks', newTask, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

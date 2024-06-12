@@ -32,7 +32,7 @@ const TaskDetails = () => {
 
         console.log(submissionData);
 
-        fetch('http://localhost:5000/submission', {
+        fetch('https://final-project-server-jade.vercel.app/submission', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -6,7 +6,7 @@ const TopEarners = () => {
   const [users, setUsers] = useState([]);
   const axiosPublic = useAxiosPublic()
   useEffect(() => {
-    axiosPublic.get('http://localhost:5000/featuredUsers')
+    axiosPublic.get('https://final-project-server-jade.vercel.app/featuredUsers')
       .then(response => {
         setUsers(response.data);
       })

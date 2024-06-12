@@ -8,7 +8,7 @@ const PaymentHistory = () => {
     const [userPayments, setUserPayments] = useState([]);
 
     useEffect(() => {
-        axiosSecure.get('http://localhost:5000/Payment')
+        axiosSecure.get('https://final-project-server-jade.vercel.app/Payment')
             .then(res => {
                 const userPayments = res.data.filter(userPayment => userPayment.userId === userData?._id);
                 setUserPayments(userPayments);

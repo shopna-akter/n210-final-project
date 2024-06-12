@@ -7,7 +7,7 @@ const WorkerHome = () => {
     const { isPending, isError, error, data: myApprovedSubmissions } = useQuery({
         queryKey: ['approvedSubmission'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/approvedSubmission?email=${user.email}`, { credentials: 'include' });
+            const res = await fetch(`https://final-project-server-jade.vercel.app/approvedSubmission?email=${user.email}`, { credentials: 'include' });
             return res.json()
         }
     })

@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
     useEffect(()=>{
-        fetch('http://localhost:5000/availableTasks')
+        fetch('https://final-project-server-jade.vercel.app/availableTasks')
         .then(res => res.json())
         .then(data => {
             setTasks(data)

@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { FaDeleteLeft } from "react-icons/fa6";
@@ -9,7 +8,7 @@ const MyTasks = () => {
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/tasks')
+        fetch('https://final-project-server-jade.vercel.app/tasks')
             .then(res => res.json())
             .then(data => {
                 setTasks(data)
@@ -27,7 +26,7 @@ const MyTasks = () => {
             confirmButtonText: 'Yes, do it!'
         }).then(result => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/tasks/${_id}`, {
+                fetch(`https://final-project-server-jade.vercel.app/tasks/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -49,7 +48,32 @@ const MyTasks = () => {
             </div>
         );
     }
-
+    const handleUpdateTask = (e , _id) => {
+        e.preventDefault()
+        const form = e.target
+        const task_title = form.task_title.value
+        const task_detail = form.task_detail.value
+        const submission_info = form.submission_info.value
+        const updatedTask = {task_title,task_detail, submission_info }
+        console.log(updatedTask);
+        fetch(`https://final-project-server-jade.vercel.app/tasks/${_id}` , {
+            method:'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body:   JSON.stringify(updatedTask)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.modifiedCount > 0) {
+                Swal.fire({
+                    title: "Good job!",
+                    text: "Tour Updated successfuly!",
+                    icon: "success"
+                  })
+            }
+        });
+    }
     return (
         <div>
             <table className="md:min-w-full divide-y table divide-gray-200">
@@ -87,12 +111,22 @@ const MyTasks = () => {
                                 </button>
                                 <dialog id="my_modal_2" className="modal">
                                     <div className="modal-box">
-                                        <div>
-                                        <span>{task.task_title}</span>
-                                        </div>
-                                        <div>
-                                            
-                                        </div>
+                                        <h2 className="text-lg font-semibold text-center text-black mb-2">Update Form</h2>
+                                        <form onSubmit={() => handleUpdateTask(task._id)}>
+                                            <div>
+                                                <label className="block text-sm font-medium mb-2">Task Title</label>
+                                                <input name="task_title" defaultValue={task.task_title} className="input input-md w-full" type="text" />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium mb-2">Task Detail</label>
+                                                <input name="task_detail" defaultValue={task.task_detail} className="input input-md w-full" type="text" />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium mb-2">submission Info</label>
+                                                <input name="submission_info" defaultValue={task.submission_info} className="input input-md w-full" type="text" />
+                                            </div>
+                                            <button className="bg-indigo-500 w-full btn">Update Task</button>
+                                        </form>
                                     </div>
                                     <form method="dialog" className="modal-backdrop">
                                         <button>close</button>

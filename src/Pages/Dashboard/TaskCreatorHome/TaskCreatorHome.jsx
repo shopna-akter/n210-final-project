@@ -9,7 +9,7 @@ const TaskCreatorHome = () => {
     const [selectedTasks, setSelectedTasks] = useState([]);
     const [selectedTaskDetails, setSelectedTaskDetails] = useState(null);
     useEffect(() => {
-        axiosSecure.get(`http://localhost:5000/submissions`)
+        axiosSecure.get(`https://final-project-server-jade.vercel.app/submissions`)
             .then(res => {
                 const tasks = res.data.filter(task => userData?.email == task.creator_email)
                 const pendingTasks = tasks.filter(pendingTask => pendingTask.status == 'pending')

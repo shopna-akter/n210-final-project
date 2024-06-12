@@ -4,7 +4,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 const AdminHome = () => {
     const [withdrawals, setWithdrawals] = useState([]);
     const axiosSecure = useAxiosSecure();
-    axiosSecure.get('http://localhost:5000/withdrawals')
+    axiosSecure.get('https://final-project-server-jade.vercel.app/withdrawals')
         .then(res => {
             setWithdrawals(res.data)
         })
@@ -14,7 +14,7 @@ const AdminHome = () => {
             withdrawalId,
             userEmail
         }
-        axiosSecure.delete(`http://localhost:5000/withdrawals/${withdrawalId}`, {data:deleteInfo})
+        axiosSecure.delete(`https://final-project-server-jade.vercel.app/withdrawals/${withdrawalId}`, {data:deleteInfo})
             .then(res => {
                 if (res.data.deletedCount > 0) {
                     Swal.fire({

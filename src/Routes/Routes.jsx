@@ -60,7 +60,7 @@ import PrivateRoute from "./PrivateRoute";
         {
           path: '/Dashboard/taskDetails/:id',
           element: <TaskDetails></TaskDetails>,
-          loader: () => fetch('http://localhost:5000/availableTasks')
+          loader: () => fetch('https://final-project-server-jade.vercel.app/availableTasks')
         },
         {
           path: '/Dashboard/mySubmissions',
