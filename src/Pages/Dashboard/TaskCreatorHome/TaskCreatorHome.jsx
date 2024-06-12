@@ -6,8 +6,8 @@ import useUserFetch from '../../../Hooks/useUserFetch';
 const TaskCreatorHome = () => {
     const userData = useUserFetch();
     const axiosSecure = useAxiosSecure()
-    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedTasks, setSelectedTasks] = useState([]);
+    const [selectedTaskDetails, setSelectedTaskDetails] = useState(null);
     useEffect(() => {
         axiosSecure.get(`http://localhost:5000/submission`)
             .then(res => {
@@ -16,8 +16,10 @@ const TaskCreatorHome = () => {
                 setSelectedTasks(pendingTasks)
             })
     }, [userData, axiosSecure])
-
-
+    const handleViewSubmission = (submissionDetails) => {
+        setSelectedTaskDetails(submissionDetails);
+        document.getElementById('my_modal_2').showModal();
+    }
     const handleReject = id => {
         Swal.fire({
             title: "Are you sure?",
@@ -58,15 +60,6 @@ const TaskCreatorHome = () => {
                 }
             })
     }
-    const openModal = (submission) => {
-        setSelectedTasks(submission);
-        setModalIsOpen(true);
-    };
-
-    const closeModal = () => {
-        setSelectedTasks(null);
-        setModalIsOpen(false);
-    };
     return (
         <div className="container mx-auto px-4">
             <h2 className="text-2xl font-bold my-4">Pending Task Reviews</h2>
@@ -91,7 +84,7 @@ const TaskCreatorHome = () => {
                                 <td className="px-4 py-2 border-b border-gray-200">
                                     <button
                                         className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                        onClick={() => openModal(selectedTask)}
+                                        onClick={() => handleViewSubmission(selectedTask.submission_details)}
                                     >
                                         View Submission
                                     </button>
@@ -114,26 +107,16 @@ const TaskCreatorHome = () => {
                 </table>
             </div>
 
-            {selectedTasks && (
-                <div className={`modal ${modalIsOpen ? 'modal-open' : ''}`}>
+            {selectedTaskDetails && (
+                <dialog id="my_modal_2" className="modal">
                     <div className="modal-box">
-                        <h2 className="text-xl font-bold">Submission Details</h2>
-                        <div>
-                            <p>Worker Name: {selectedTasks.worker_name}</p>
-                            <p>Worker Email: {selectedTasks.worker_email}</p>
-                            <p>Task Title: {selectedTasks.task_title}</p>
-                            <p>Payable Amount: {selectedTasks.payable_amount}</p>
-                        </div>
-                        <div className="modal-action">
-                            <button
-                                className="btn"
-                                onClick={closeModal}
-                            >
-                                Close
-                            </button>
-                        </div>
+                        <h3 className="font-bold text-lg">Hello!</h3>
+                        <p className="py-4">{selectedTaskDetails}</p>
                     </div>
-                </div>
+                    <form method="dialog" className="modal-backdrop">
+                        <button>close</button>
+                    </form>
+                </dialog>
             )}
         </div>
     );

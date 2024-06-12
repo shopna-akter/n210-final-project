@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useUserFetch from "../../Hooks/useUserFetch";
+import { FaBell } from "react-icons/fa";
 
 
 const DashboardNavbar = () => {
@@ -19,6 +20,11 @@ const DashboardNavbar = () => {
                         <h2 className="font-medium text-lg">Role:{userData?.role}</h2>
                         <h2 className="font-medium text-lg">Name:{userData?.name}</h2>
                     </div>
+                </div>
+                <div className="text-7xl mb-5">|</div>
+                <div>
+                    <FaBell className="ml-8"></FaBell>
+                    <h2>Notification</h2>
                 </div>
             </div>
         </div>

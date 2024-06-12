@@ -94,15 +94,15 @@ import AdminRoute from "./AdminRoute";
         // admin
         {
           path: '/Dashboard/alluser',
-          element: <AdminRoute><Allusers></Allusers></AdminRoute>
+          element: <Allusers></Allusers>
         },
         {
           path: '/Dashboard/adminHome',
-          element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+          element: <AdminHome></AdminHome>
         },
         {
           path: '/Dashboard/manageTasks',
-          element: <AdminRoute><ManageTasks></ManageTasks></AdminRoute>
+          element: <ManageTasks></ManageTasks>
         }
       ]
     }

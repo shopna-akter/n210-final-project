@@ -5,7 +5,11 @@ const useUserFetch = () => {
     const { user } = useContext(AuthContext)
     const [users, setUsers] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('http://localhost:5000/users' , {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('access-token')}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setUsers(data);
