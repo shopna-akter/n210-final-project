@@ -16,3 +16,4 @@ Visit the live site: [https://n210ph-final.web.app.]
 7. Customizable Settings: Personalize your experience according to your preferences.
 8. Secure Authentication: Protect user data with robust authentication protocols.
 9. Collaboration Tools: Facilitate teamwork with integrated communication features.
+10. Regular Updates: Stay up-to-date with frequent updates and enhancements to improve functionality.
