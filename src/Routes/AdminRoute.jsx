@@ -1,20 +1,20 @@
-import { Navigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-import useAdmin from "../Hooks/useAdmin";
+import { Navigate, useLocation } from "react-router-dom";
+import useUserFetch from "../Hooks/useUserFetch";
+
 
 
 // eslint-disable-next-line react/prop-types
 const AdminRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
-    const [isAdmin, isAdminLoading] = useAdmin();
     const location = useLocation();
-
-    if (loading || isAdminLoading) {
+    const userData = useUserFetch()
+    if (loading) {
         return <progress className="progress w-56"></progress>
     }
 
-    if (user && isAdmin) {
+    if (user && userData?.role === 'admin') {
         return children;
     }
 

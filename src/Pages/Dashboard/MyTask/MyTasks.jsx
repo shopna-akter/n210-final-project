@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { FaDeleteLeft } from "react-icons/fa6";
@@ -8,14 +8,14 @@ import { FaEdit } from "react-icons/fa";
 const MyTasks = () => {
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);
-    useEffect(()=>{
+    useEffect(() => {
         fetch('http://localhost:5000/tasks')
-        .then(res => res.json())
-        .then(data => {
-            setTasks(data)
-        })
-    },[])
-    
+            .then(res => res.json())
+            .then(data => {
+                setTasks(data)
+            })
+    }, [])
+
 
     const handleDelete = _id => {
         Swal.fire({
@@ -82,9 +82,22 @@ const MyTasks = () => {
                                 <h2 className="md:text-lg font-semibold">{task.task_quantity}</h2>
                             </td>
                             <td className="px-6 gap-4 py-4 flex whitespace-nowrap text-sm text-gray-500">
-                                <Link to={`/updatefood/${task._id}`} className="text-indigo-600 hover:text-indigo-900">
+                                <button className="text-indigo-600 hover:text-indigo-900" onClick={() => document.getElementById('my_modal_2').showModal()}>
                                     <FaEdit />
-                                </Link>
+                                </button>
+                                <dialog id="my_modal_2" className="modal">
+                                    <div className="modal-box">
+                                        <div>
+                                        <span>{task.task_title}</span>
+                                        </div>
+                                        <div>
+                                            
+                                        </div>
+                                    </div>
+                                    <form method="dialog" className="modal-backdrop">
+                                        <button>close</button>
+                                    </form>
+                                </dialog>
                                 <button onClick={() => handleDelete(task._id)} className="text-red-600 hover:text-red-900 ml-2">
                                     <FaDeleteLeft />
                                 </button>

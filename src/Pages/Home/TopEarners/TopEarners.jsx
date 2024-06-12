@@ -31,9 +31,9 @@ const TopEarners = () => {
                 <td className="px-4 py-2 border-b border-gray-200">
                   <img src={user.profilePicture} alt={`Picture of ${user.name}`} className="w-12 rounded-full h-auto"/>
                 </td>
-                <td className="px-4 py-2 border-b border-gray-200">{user.name}</td>
-                <td className="px-4 py-2 border-b border-gray-200">{user.coin}</td>
-                <td className="px-4 py-2 border-b border-gray-200">{user.task_completion}%</td>
+                <td className="px-4 py-2 border-b border-gray-200 font-medium text-lg lg:pl-24">{user.name}</td>
+                <td className="px-4 py-2 border-b border-gray-200 font-medium text-lg lg:pl-24">{user.coin}</td>
+                <td className="px-4 py-2 border-b border-gray-200 font-medium text-lg lg:pl-24">{user.taskCompletion}</td>
               </tr>
             ))}
           </tbody>

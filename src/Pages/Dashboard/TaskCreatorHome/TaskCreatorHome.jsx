@@ -9,7 +9,7 @@ const TaskCreatorHome = () => {
     const [selectedTasks, setSelectedTasks] = useState([]);
     const [selectedTaskDetails, setSelectedTaskDetails] = useState(null);
     useEffect(() => {
-        axiosSecure.get(`http://localhost:5000/submission`)
+        axiosSecure.get(`http://localhost:5000/submissions`)
             .then(res => {
                 const tasks = res.data.filter(task => userData?.email == task.creator_email)
                 const pendingTasks = tasks.filter(pendingTask => pendingTask.status == 'pending')
@@ -44,9 +44,10 @@ const TaskCreatorHome = () => {
             }
         })
     }
-    const handleApprove = async (id, worker_email, payable_amount) => {
+    const handleApprove = async (id, worker_email, payable_amount , taskId) => {
         const newStatus = 'approved'
-        const updates = { newStatus, worker_email, payable_amount }
+        const updates = { newStatus, worker_email, payable_amount , taskId}
+        console.log(taskId);
         axiosSecure.put(`/submission/${id}`, updates)
             .then(res => {
                 console.log(res.data)
@@ -90,7 +91,7 @@ const TaskCreatorHome = () => {
                                     </button>
                                     <button
                                         className="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                        onClick={() => handleApprove(selectedTask._id, selectedTask.worker_email, selectedTask.payable_amount)}
+                                        onClick={() => handleApprove(selectedTask._id, selectedTask.worker_email, selectedTask.payable_amount, selectedTask.task_id)}
                                     >
                                         Approve
                                     </button>

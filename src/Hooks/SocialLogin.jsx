@@ -19,7 +19,8 @@ const SocialLogin = () => {
                     email: user?.email,
                     profilePicture: user?.photoURL,
                     role: "Worker",
-                    coin: 10
+                    coin: 10,
+                    taskCompletion: 0
                 };
 
                 axiosPublic.post('/users', RegisteredData)

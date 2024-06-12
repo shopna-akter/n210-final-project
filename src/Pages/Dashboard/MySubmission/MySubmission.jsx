@@ -5,41 +5,60 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 const MySubmission = () => {
     const { user } = useContext(AuthContext);
     const [pages, setPages] = useState([]);
-    const [currentPage , setCurrentPage] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(2);
-    const [selected , setSelected] = useState('bg-indigo-500 hover:bg-indigo-500')
-    const { isPending, isError, error, data: mySubmissions } = useQuery({
-        queryKey: ['Submission ' , itemsPerPage , currentPage],
+    const [count, setCount] = useState(0);
+    const [selected, setSelected] = useState('bg-indigo-500 hover:bg-indigo-500');
+
+    useEffect(() => {
+        if (user && user.email) {
+            fetch(`http://localhost:5000/submissionCount/${user.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setCount(data.count);
+                    console.log(data.count);
+                })
+                .catch(err => {
+                    console.error("Error fetching submission count:", err);
+                });
+        }
+    }, [user]);
+    const { isLoading, isError, error, data: mySubmissions } = useQuery({
+        queryKey: ['Submission', user.email, itemsPerPage, currentPage],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/submission?email=${user.email}&page=${currentPage}&size=${itemsPerPage}`, { credentials: 'include' });
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
             return res.json();
-        }
+        },
+        enabled: !!user && !!user.email
     });
+    console.log(mySubmissions);
     useEffect(() => {
-        if (mySubmissions) {
-            const count = mySubmissions.length;
-            const numberOfPages = Math.ceil(count / itemsPerPage);
-            setPages([...Array(numberOfPages).keys()]);
-        }
-    }, [mySubmissions, itemsPerPage]);
+        const numberOfPages = Math.ceil(count / itemsPerPage);
+        setPages([...Array(numberOfPages).keys()]);
+    }, [count, itemsPerPage]);
 
     const handleItemsPerPage = (e) => {
         const value = parseInt(e.target.value);
         setItemsPerPage(value);
-        setCurrentPage(0)
-    }
+        setCurrentPage(0);
+    };
+
     const handlePrev = () => {
-        if(currentPage > 0){
-            setCurrentPage(currentPage - 1)
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
         }
-    }
+    };
+
     const handleNext = () => {
-        if(currentPage < pages.length -1){
-            setCurrentPage(currentPage + 1)
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1);
         }
-    }
-    console.log(currentPage);
-    if (isPending) {
+    };
+
+    if (isLoading) {
         return <span className="loading loading-spinner"></span>;
     }
 
@@ -64,7 +83,6 @@ const MySubmission = () => {
                             <th>Status</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         {mySubmissions && mySubmissions.map(mySubmission => (
                             <tr key={mySubmission._id}>
@@ -91,7 +109,7 @@ const MySubmission = () => {
                     <div>
                         <button className="btn mr-2" onClick={handlePrev}>Previous</button>
                         {pages.map(page => (
-                            <button onClick={() => setCurrentPage(page)} className={`mr-3 btn ${currentPage=== page && selected}`} key={page}>{page + 1}</button>
+                            <button onClick={() => setCurrentPage(page)} className={`mr-3 btn ${currentPage === page && selected}`} key={page}>{page + 1}</button>
                         ))}
                         <button onClick={handleNext} className="btn">Next</button>
                     </div>

@@ -5,6 +5,7 @@ import useUserFetch from "../../../Hooks/useUserFetch";
 const AddTask = () => {
     const userData = useUserFetch()
     const axiosSecure = useAxiosSecure()
+    const currentTime = new Date()
     const handleAddTask = e => {
         e.preventDefault()
         const form = e.target
@@ -15,8 +16,9 @@ const AddTask = () => {
         const completion_date = form.completion_date.value;
         const submission_info = form.submission_info.value;
         const task_image_url = form.task_image_url.value;
+        const formattedTime = `${currentTime.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
         const newTask = {
-            task_title, task_detail, task_quantity, payable_amount, completion_date, submission_info, task_image_url, creator_email: userData.email, creator_name: userData.name, current_time: new Date()
+            task_title, task_detail, task_quantity, payable_amount, completion_date, submission_info, task_image_url, creator_email: userData.email, creator_name: userData.name, current_time: formattedTime
         };
         if (task_quantity * payable_amount > userData?.coin) {
             Swal.fire({

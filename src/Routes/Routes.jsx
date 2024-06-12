@@ -21,7 +21,7 @@ import Withdrawls from "../Pages/Dashboard/Withdraw/Withdrawls";
 import ManageTasks from "../Pages/Dashboard/ManageTasks/ManageTasks";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
-import AdminRoute from "./AdminRoute";
+// import AdminRoute from "./AdminRoute";
 
   export const router = createBrowserRouter([
     {

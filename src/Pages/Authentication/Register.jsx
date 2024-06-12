@@ -15,7 +15,8 @@ const Register = () => {
         const profilePicture = form.profilePicture.value
         const password = form.password.value
         const role = form.role.value
-        const RegisteredData = { name, email, profilePicture, password, role, coin }
+        const taskCompletion = 0
+        const RegisteredData = { name, email, profilePicture, password, role, coin , taskCompletion}
         console.log(RegisteredData);
         if (role === 'TaskCreator') {
             setCoin(50)
