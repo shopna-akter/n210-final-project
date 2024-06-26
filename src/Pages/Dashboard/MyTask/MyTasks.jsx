@@ -48,31 +48,31 @@ const MyTasks = () => {
             </div>
         );
     }
-    const handleUpdateTask = (e , _id) => {
+    const handleUpdateTask = (e, _id) => {
         e.preventDefault()
         const form = e.target
         const task_title = form.task_title.value
         const task_detail = form.task_detail.value
         const submission_info = form.submission_info.value
-        const updatedTask = {task_title,task_detail, submission_info }
+        const updatedTask = { task_title, task_detail, submission_info }
         console.log(updatedTask);
-        fetch(`https://final-project-server-jade.vercel.app/tasks/${_id}` , {
-            method:'PUT',
+        fetch(`https://final-project-server-jade.vercel.app/tasks/${_id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body:   JSON.stringify(updatedTask)
+            body: JSON.stringify(updatedTask)
         })
-        .then(res => res.json())
-        .then(data => {
-            if (data.modifiedCount > 0) {
-                Swal.fire({
-                    title: "Good job!",
-                    text: "Tour Updated successfuly!",
-                    icon: "success"
-                  })
-            }
-        });
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    Swal.fire({
+                        title: "Good job!",
+                        text: "Tour Updated successfuly!",
+                        icon: "success"
+                    })
+                }
+            });
     }
     return (
         <div>
@@ -112,7 +112,7 @@ const MyTasks = () => {
                                 <dialog id="my_modal_2" className="modal">
                                     <div className="modal-box">
                                         <h2 className="text-lg font-semibold text-center text-black mb-2">Update Form</h2>
-                                        <form onSubmit={() => handleUpdateTask(task._id)}>
+                                        <form onSubmit={(e) => handleUpdateTask(e, task._id)}>
                                             <div>
                                                 <label className="block text-sm font-medium mb-2">Task Title</label>
                                                 <input name="task_title" defaultValue={task.task_title} className="input input-md w-full" type="text" />
@@ -122,7 +122,7 @@ const MyTasks = () => {
                                                 <input name="task_detail" defaultValue={task.task_detail} className="input input-md w-full" type="text" />
                                             </div>
                                             <div>
-                                                <label className="block text-sm font-medium mb-2">submission Info</label>
+                                                <label className="block text-sm font-medium mb-2">Submission Info</label>
                                                 <input name="submission_info" defaultValue={task.submission_info} className="input input-md w-full" type="text" />
                                             </div>
                                             <button className="bg-indigo-500 w-full btn">Update Task</button>
